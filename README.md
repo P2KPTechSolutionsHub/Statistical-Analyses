@@ -143,7 +143,7 @@ pip install numpy pandas scipy statsmodels seaborn matplotlib
 ---
 ## 📌 Notes
 
-* Logic is generalized with clean loops and mappings.
+* Coding logic is generalized with clean loops and mappings.
 * Transformations are modular and reusable.
 * Diagnostic tools ensure assumptions are verified before inference.
 * Designed for scalability across other soil parameters (not just pH).
