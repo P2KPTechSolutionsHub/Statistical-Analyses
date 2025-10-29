@@ -1,6 +1,6 @@
 
 
-# 📘 Soil Depth Effect Analysis
+# 📘 Statistical Analysis
 
 Python code for testing **statistical significance** of soil pH across **depth, treatment, and time**, including optional transformations to meet model assumptions. Supports parametric (Welch’s t-test) and non-parametric (Mann–Whitney U) analyses.
 
@@ -10,8 +10,8 @@ Python code for testing **statistical significance** of soil pH across **depth, 
 
 * **pH** – Response variable
 * **Depth** – Soil depth (categorical)
-* **Treatment** – Experimental groups
-* **Day** – Time points
+* **Treatment** – Five Experimental groups
+* **Day** – Three Time points
 
 ---
 
