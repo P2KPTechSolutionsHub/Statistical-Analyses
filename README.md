@@ -2,7 +2,7 @@
 
 # 📘 Statistical Analysis
 
-Python code for testing **statistical significance** of soil pH across **depth, treatment, and time**, including optional transformations to meet model assumptions. Supports parametric (Welch’s t-test) and non-parametric (Mann–Whitney U) analyses.
+Python code for testing **statistical significance** of soil pH across **depth, treatment, and time**, including transformations to ascertain model assumptions. Supports parametric (Welch’s t-test) and non-parametric (Mann–Whitney U) analyses.
 
 ---
 
