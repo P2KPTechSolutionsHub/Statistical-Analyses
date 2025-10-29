@@ -1,175 +1,78 @@
 
-# 📘 Soil Depth Effect Analysis: Transformations, Treatment, Time & Interaction
 
-This repository provides Python code for evaluating how soil **pH varies with depth** across multiple **treatments**, **time points**, and their **interactions**, while also testing and applying **transformations** to meet statistical assumptions. The analysis uses a combination of **model diagnostics**, **parametric (Welch’s t-tests)**, and **non-parametric (Mann–Whitney U tests)**.
+# 📘 Soil Depth Effect Analysis
 
----
-
-## 📁 Contents
-
-### 1. **Data Structure**
-
-The dataset is structured as a long-format DataFrame with the following variables:
-
-* **pH**: Response variable
-* **Depth**: Soil depth (categorical)
-* **Treatment**: One of:
-
-  * `Control`
-  * `Root Mulched`
-  * `Root Mixed`
-  * `Leaf Mulched`
-  * `Leaf Mixed`
-* **Day**: Time points, 
-
-## 🔄 2. Data Transformation & Model Diagnostics
-
-Before formal analysis, the distribution of residuals is assessed via:
-
-### 🧪 Transformations Tried
-
-| Transformation | Syntax                   |
-| -------------- | ------------------------ |
-| Log            | `np.log(df['pH'])`       |
-| Square Root    | `np.sqrt(df['pH'])`      |
-| Box-Cox        | `stats.boxcox(df['pH'])` |
-
-### 📊 Residual Diagnostic Plots
-
-A helper function `check_model()` provides:
-
-* Histogram + KDE of residuals
-* Q–Q Plot
-* Shapiro–Wilk test result
-
-```python
-def check_model(model, title):
-    ...
-    print(f"{title} - Shapiro-Wilk p = {p:.4f}")
-```
-
-**Goal**: improves residual normality before model fitting.
+Python code for testing **statistical significance** of soil pH across **depth, treatment, and time**, including optional transformations to meet model assumptions. Supports parametric (Welch’s t-test) and non-parametric (Mann–Whitney U) analyses.
 
 ---
 
-## 🔍 3. Analytical Breakdown
+## 📁 Data
 
-### ✅ A. Depth Effect Across Treatments
-
-* **Objective**: Compare treatments at each depth
-* **Stats**:
-
-  * Welch’s t-test
-  * Mann–Whitney U test
-* **Approach**:
-
-  * Loop over depths
-  * Test all treatment pairs per depth
+* **pH** – Response variable
+* **Depth** – Soil depth (categorical)
+* **Treatment** – Experimental groups
+* **Day** – Time points
 
 ---
 
-### ✅ B. Depth Effect Across Time
+## 🔄 Transformations & Diagnostics
 
-* **Objective**: Compare time points at each depth per treatment
-* **Stats**:
-
-  * Welch’s t-test
-  * Mann–Whitney U (MWU)test
-* **Approach**:
-
-  * Loop over treatments
-  * For each, test all day-pairs across depths
+* Options: `log`, `sqrt`, `Box-Cox`
+* Residual checks via `check_model()`: histogram, Q–Q plot, Shapiro–Wilk test
 
 ---
 
-### ✅ C. Depth × Treatment × Time Interaction
+## 🔍 Analyses
 
-* **Objective**: Evaluate if treatment effects on pH vary jointly across depth and time
-* **Stats**:
+1. **Depth Effect Across Treatments**
+2. **Depth Effect Across Time**
+3. **Depth × Treatment × Time Interaction**
 
-  * Welch’s t-test
-  * Mann–Whitney U test
-* **Approach**:
-
-  * For each day, test all treatment pairs at each depth
+Tests: Welch’s t-test, Mann–Whitney U (p-values and statistics reported).
 
 ---
 
-## 🧪 Statistical Highlights
-
-| Test Type          | Description                                               |
-| ------------------ | --------------------------------------------------------- |
-| **Welch’s t-test** | For comparing means without assuming equal variances      |
-| **Mann–Whitney U** | Non-parametric test comparing medians/distribution shapes |
-
-* Color-coded significance in summary tables (e.g., red for `p < 0.05`).
-* Outputs printed and optionally exportable via `pandas`.
-
----
-
-## 🖥️ Code Execution
-
-### 📦 Requirements
+## 🖥️ Usage
 
 ```bash
 pip install numpy pandas scipy statsmodels seaborn matplotlib
 ```
 
-### 📂 Suggested Workflow (Notebook or Script)
-
-```python
-# 1. Run transformation section
-# 2. Run model diagnostics
-# 3. Run depth effect across treatment
-# 4. Run depth effect across time
-# 5. Run interaction: depth × treatment × time
-```
+Workflow: transform → check residuals → analyze depth, treatment, time, and interactions.
 
 ---
 
 ## 📊 Outputs
 
-* **Summary tables**: Pairwise comparisons at each level
-* **Visuals**:
-
-  * Residual histograms
-  * Q–Q plots
-* **Statistical summaries**:
-
-  * P-values
-  * Test statistics
-  * Optional CSV/Excel export
-
----
-## 📌 Notes
-
-* Coding logic is generalized with clean loops and mappings.
-* Transformations are modular and reusable.
-* Diagnostic tools ensure assumptions are verified before inference.
-* Designed for scalability across other soil parameters (not just pH).
+* Summary tables (pairwise comparisons)
+* Residual plots and Q–Q plots
+* Optional CSV/Excel export
 
 ---
 
-## 📁 Folder Structure Suggestion (Optional)
+## 📁 Folder Structure
 
 ```
 soil-depth-analysis/
-├── data/
-│   └── pH_raw_data.csv
-├── notebooks/
-│   └── pH_analysis.ipynb
-├── src/
-│   ├── transformations.py
-│   ├── stats_tests.py
-│   └── visualization.py
+├── data/pH_raw_data.csv
+├── notebooks/pH_analysis.ipynb
+├── src/transformations.py
+├── src/stats_tests.py
+├── src/visualization.py
 ├── README.md
 └── requirements.txt
 ```
 
-## 📥 Optional Deliverables
+---
 
-✅ `.md` 
-✅ Zip folder of organized code and outputs
+## 📌 Notes
 
+* Modular transformations
+* Generalized loops for scalability
+* Diagnostics ensure valid statistical inference
+
+---
+
+✅ Optional: `.md` summary and organized `.zip` folder of code & outputs
 
 
